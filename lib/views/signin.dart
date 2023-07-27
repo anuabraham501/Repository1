@@ -23,7 +23,7 @@ class _SignInState extends State<SignIn> {
           ],
         ),
       ),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.lightGreen,
       body: Center(
         child: Column(
           children: <Widget>[

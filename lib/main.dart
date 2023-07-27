@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       title: MyApp.appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightGreen,
       ),
       home: FutureBuilder(
         future: getDefaultRoute(),

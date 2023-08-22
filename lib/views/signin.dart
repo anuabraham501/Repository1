@@ -1,7 +1,9 @@
+// import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:women_safety_app/services/auth_methods.dart';
-// import 'package:women_safety_app/views/home/home.dart';
+import 'package:women/services/auth_methods.dart';
+import 'package:women/views/home/home.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -41,11 +43,12 @@ class _SignInState extends State<SignIn> {
                 buttonColor: Colors.white,
                 child: ElevatedButton(
                   onPressed: () async {
-                    // final user = await AuthMethods().signInWithGoogle(context);
-                    // if (user != null && mounted) {
-                    //   Navigator.pushReplacement(
-                    //       context, MaterialPageRoute(builder: (context) => const Home()));
-                    // }
+                    // await AuthMethods().signOut();
+                    final user = await AuthMethods().signInWithGoogle(context);
+                    if (user != null && mounted) {
+                      Navigator.pushReplacement(
+                          context, MaterialPageRoute(builder: (context) => const Home()));
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,

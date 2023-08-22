@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>822015454961-4bv6vrakmbmg6ifrr4k0mc1n3218a35u.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.822015454961-4bv6vrakmbmg6ifrr4k0mc1n3218a35u</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>822015454961-v4tgn7t0krmknihrb3tebcr0ijklc6cq.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAgPGaa24JFwCXV3C6FZh0zd6wa6Y8Zm9c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>822015454961</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.women</string>
+	<key>PROJECT_ID</key>
+	<string>women-safety-app-cd686</string>
+	<key>STORAGE_BUCKET</key>
+	<string>women-safety-app-cd686.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:822015454961:ios:eba8ae15b7eeda737a4350</string>
+</dict>
+</plist>

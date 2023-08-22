@@ -1,0 +1,3 @@
+Alias=androiddebugkey
+storepass=android
+keypass=android

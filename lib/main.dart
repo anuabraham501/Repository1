@@ -1,19 +1,24 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:women/views/home/home.dart';
 import 'package:women/views/signin.dart';
+import 'package:women/services/auth_methods.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // NotificationController.initializeLocalNotifications();
 
   runApp(const MyApp());
+  AuthMethods().signOut();
 }
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static const String appName = 'WithYou - Women Safety App';
+  static const String appName = 'Women\'s App';
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -21,8 +26,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Future<Widget> getDefaultRoute() async {
-    // final user = await AuthMethods().getCurrentUser();
-    // if (user != null) return const Home();
+    final user = await AuthMethods().getCurrentUser();
+    if (user != null) return const Home();
     return const SignIn();
   }
 

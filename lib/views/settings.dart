@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:women/colors.dart';
 import 'package:women/services/shared_preferences.dart';
 import 'package:women/services/sos_message_methods.dart';
 
@@ -114,7 +115,7 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Settings", style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.blue,
+        backgroundColor: primaryColor,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -145,7 +146,7 @@ class _SettingsState extends State<Settings> {
                 // ElevatedButton(
                 //   child: const Text(
                 //     'RESET Shared Prefs',
-                //     style: TextStyle(color: Colors.blue, fontSize: 16),
+                //     style: TextStyle(color: primaryColor, fontSize: 16),
                 //   ),
                 //   onPressed: () {
                 //     SharedPreferenceHelper.clearData();

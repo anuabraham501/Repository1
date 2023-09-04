@@ -1,12 +1,12 @@
 import 'dart:developer';
 
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:geocoding/geocoding.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-// import 'package:telephony/telephony.dart';
-// import 'package:women/components/permission_manager/permissions.dart';
-// import 'package:women/services/database_methods.dart';
-// import 'package:women/services/contacts.dart';
+import 'package:telephony/telephony.dart';
+import 'package:women/components/permission_manager/permissions.dart';
+import 'package:women/services/database_methods.dart';
+import 'package:women/services/contacts.dart';
 import 'package:women/services/shared_preferences.dart';
 
 class SosMethods {
@@ -48,25 +48,25 @@ class SosMethods {
   static sendSos() async {
     log('Sos Triggered');
 
-    // PositionDetails? positionDetials = await _determinePosition();
+    PositionDetails? positionDetials = await _determinePosition();
 
-    // if (positionDetials != null) {
-    //   final latitude = positionDetials.getPosition.latitude;
-    //   final longitude = positionDetials.getPosition.longitude;
-    //   String address = positionDetials.getAddress;
+    if (positionDetials != null) {
+      final latitude = positionDetials.getPosition.latitude;
+      final longitude = positionDetials.getPosition.longitude;
+      String address = positionDetials.getAddress;
 
-    //   String messageBody =
-    //       "https://www.google.com/maps/search/?api=1&query=$latitude%2C$longitude. $address";
+      String messageBody =
+          "https://www.google.com/maps/search/?api=1&query=$latitude%2C$longitude. $address";
 
-    //   final message = messageHead + messageBody;
+      final message = messageHead + messageBody;
 
-    //   bool result = await _initiateSendSos(message);
-    //   if (result) {
-    //     Fluttertoast.showToast(msg: 'SOS Sent!');
-    //   } else {
-    //     Fluttertoast.showToast(msg: 'Some Error Occured. Sending SOS SMS Failed!');
-    //   }
-    // }
+      bool result = await _initiateSendSos(message);
+      if (result) {
+        Fluttertoast.showToast(msg: 'SOS Sent!');
+      } else {
+        Fluttertoast.showToast(msg: 'Some Error Occured. Sending SOS SMS Failed!');
+      }
+    }
   }
 
   static Future<bool> checkLocationPermission() async {
@@ -86,106 +86,106 @@ class SosMethods {
     }
   }
 
-  // static Future<PositionDetails?> _determinePosition() async {
-  //   // check if location service is enabled using getLocationPermission()
-  //   await PermissionMethods.initiatePermissionManger();
-  //   bool locationPermission = await checkLocationPermission();
-  //   if (!locationPermission) {
-  //     Fluttertoast.showToast(msg: 'No Location data. SOS Failed.');
-  //     return null;
-  //   }
+  static Future<PositionDetails?> _determinePosition() async {
+    // check if location service is enabled using getLocationPermission()
+    await PermissionMethods.initiatePermissionManger();
+    bool locationPermission = await checkLocationPermission();
+    if (!locationPermission) {
+      Fluttertoast.showToast(msg: 'No Location data. SOS Failed.');
+      return null;
+    }
 
-  //   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
-  //   try {
-  //     List<Placemark> placemarks =
-  //         await placemarkFromCoordinates(position.latitude, position.longitude);
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
 
-  //     Placemark place = placemarks[0];
+      Placemark place = placemarks[0];
 
-  //     Position currentPosition = position;
-  //     String currentAddress = "${place.locality}, ${place.postalCode}, ${place.country}";
+      Position currentPosition = position;
+      String currentAddress = "${place.locality}, ${place.postalCode}, ${place.country}";
 
-  //     PositionDetails positionDetails = PositionDetails(currentPosition, currentAddress);
-  //     return positionDetails;
-  //   } catch (e) {
-  //     log(e.toString());
+      PositionDetails positionDetails = PositionDetails(currentPosition, currentAddress);
+      return positionDetails;
+    } catch (e) {
+      log(e.toString());
 
-  //     Fluttertoast.showToast(msg: 'Oops! Apps could not fetch Address.');
+      Fluttertoast.showToast(msg: 'Oops! Apps could not fetch Address.');
 
-  //     PositionDetails positionDetails = PositionDetails(position, "");
-  //     return positionDetails;
-  //   }
-  // }
+      PositionDetails positionDetails = PositionDetails(position, "");
+      return positionDetails;
+    }
+  }
 
-  // static Future<bool> _initiateSendSos(String message) async {
-  //   DatabaseMethods databaseMethods = DatabaseMethods();
-  //   List<TContact> contactList = await databaseMethods.getContactList();
-  //   String recipients = "";
-  //   int i = 1;
-  //   for (TContact contact in contactList) {
-  //     recipients += contact.getNumber;
-  //     if (i != contactList.length) {
-  //       recipients += ";";
-  //       i++;
-  //     }
-  //   }
+  static Future<bool> _initiateSendSos(String message) async {
+    DatabaseMethods databaseMethods = DatabaseMethods();
+    List<TContact> contactList = await databaseMethods.getContactList();
+    String recipients = "";
+    int i = 1;
+    for (TContact contact in contactList) {
+      recipients += contact.getNumber;
+      if (i != contactList.length) {
+        recipients += ";";
+        i++;
+      }
+    }
 
-  //   bool result = await sendSMS2Recipients(recipients, message);
+    bool result = await sendSMS2Recipients(recipients, message);
 
-  //   return result;
-  // }
+    return result;
+  }
 
-  // static Future<bool> sendSMS2Recipients(String recipients, String message) async {
-  //   final Telephony telephony = Telephony.instance;
+  static Future<bool> sendSMS2Recipients(String recipients, String message) async {
+    final Telephony telephony = Telephony.instance;
 
-  //   bool serviceEnabled = await SMSPerms.check().isGranted;
+    bool serviceEnabled = await SMSPerms.check().isGranted;
 
-  //   if (!serviceEnabled) {
-  //     // TODO: graciously handle this
-  //     Fluttertoast.showToast(msg: SMSPerms.permanentDeniedFeedback);
-  //     return false;
-  //   } else {
-  //     // bool canSendSms = await telephony.isSmsCapable;
-  //     // print(canSendSms);
-  //     // SimState simState = await telephony.simState;
-  //     // print(simState);
+    if (!serviceEnabled) {
+      // TODO: graciously handle this
+      Fluttertoast.showToast(msg: SMSPerms.permanentDeniedFeedback);
+      return false;
+    } else {
+      // bool canSendSms = await telephony.isSmsCapable;
+      // print(canSendSms);
+      // SimState simState = await telephony.simState;
+      // print(simState);
 
-  //     listener(SendStatus status) {
-  //       if (status == SendStatus.SENT || status == SendStatus.DELIVERED) {
-  //         log(status.toString());
-  //         log('SmsSendStatusListener report: SMS was sent!');
-  //         Fluttertoast.showToast(msg: 'SOS Sent!');
-  //       } else {
-  //         log(status.toString());
-  //         log('SmsSendStatusListener report: SMS was not sent!');
-  //         Fluttertoast.showToast(msg: 'Sending SOS SMS Failed!');
-  //       }
-  //     }
+      listener(SendStatus status) {
+        if (status == SendStatus.SENT || status == SendStatus.DELIVERED) {
+          log(status.toString());
+          log('SmsSendStatusListener report: SMS was sent!');
+          Fluttertoast.showToast(msg: 'SOS Sent!');
+        } else {
+          log(status.toString());
+          log('SmsSendStatusListener report: SMS was not sent!');
+          Fluttertoast.showToast(msg: 'Sending SOS SMS Failed!');
+        }
+      }
 
-  //     List<String> recipientList = recipients.split(';');
+      List<String> recipientList = recipients.split(';');
 
-  //     for (String recipient in recipientList) {
-  //       // This one supports all android devices..
-  //       await telephony.sendSms(
-  //         to: recipient,
-  //         message: message,
-  //         isMultipart: true,
-  //         statusListener: listener,
-  //       );
-  //     }
+      for (String recipient in recipientList) {
+        // This one supports all android devices..
+        await telephony.sendSms(
+          to: recipient,
+          message: message,
+          isMultipart: true,
+          statusListener: listener,
+        );
+      }
 
-  //     // log('$recipients : $message');
-  //     // telephony.sendSms( // may not support in some devices..
-  //     //   to: recipients,
-  //     //   message: message,
-  //     //   isMultipart: true,
-  //     //   statusListener: listener,
-  //     // );
+      // log('$recipients : $message');
+      // telephony.sendSms( // may not support in some devices..
+      //   to: recipients,
+      //   message: message,
+      //   isMultipart: true,
+      //   statusListener: listener,
+      // );
 
-  //     return true;
-  //   }
-  // }
+      return true;
+    }
+  }
 }
 
 class PositionDetails {

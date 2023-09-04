@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'dart:math' hide log;
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:women/services/database_methods.dart';
+import 'package:women/colors.dart';
+import 'package:women/services/database_methods.dart';
 import 'package:women/services/shared_preferences.dart';
 import 'package:women/services/sos_message_methods.dart';
 
@@ -21,8 +21,8 @@ class SosNotificationMethods {
           channelKey: channelKey,
           channelName: 'SOS Initializer',
           channelDescription: 'Notification channel for SOS Triggering',
-          defaultColor: Colors.deepPurple,
-          ledColor: Colors.deepPurple,
+          defaultColor: notificationColor,
+          ledColor: notificationColor,
           vibrationPattern: lowVibrationPattern,
           onlyAlertOnce: true,
           importance: NotificationImportance.Max,
@@ -135,12 +135,12 @@ class SosNotificationMethods {
   }
 
   static void manageSosNotificationVisibility() async {
-    // final databaseMethods = DatabaseMethods();
-    // int count = await databaseMethods.getCount();
-    // if (count != 0) {
-    //   createSendSosNotification(1337);
-    // } else {
-    //   removeNotification();
-    // }
+    final databaseMethods = DatabaseMethods();
+    int count = await databaseMethods.getCount();
+    if (count != 0) {
+      createSendSosNotification(1337);
+    } else {
+      removeNotification();
+    }
   }
 }

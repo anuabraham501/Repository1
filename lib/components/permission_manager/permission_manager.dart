@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:women/components/permission_manager/consent_popup.dart';
-// import 'package:women/services/notification_controller.dart';
+import 'package:women/services/notification_controller.dart';
 import 'permissions.dart';
 
 class PermissionManager extends StatefulWidget {
@@ -40,16 +40,16 @@ class _PermissionManagerState extends State<PermissionManager> {
     );
   }
 
-  // void notificationPermsHandler(bool isAllowed) {
-  //   setState(() => hasNotificationsPerms = isAllowed);
-  //   if (isAllowed) {
-  //     log('Notification permission granted');
-  //     NotificationController.setListeners(context);
-  //   } else {
-  //     Future.delayed(Duration.zero, () => showPermsConsent());
-  //     log('Notification permission denied');
-  //   }
-  // }
+  void notificationPermsHandler(bool isAllowed) {
+    setState(() => hasNotificationsPerms = isAllowed);
+    if (isAllowed) {
+      log('Notification permission granted');
+      NotificationController.setListeners(context);
+    } else {
+      Future.delayed(Duration.zero, () => showPermsConsent());
+      log('Notification permission denied');
+    }
+  }
 
   void smsPermsHandler(PermissionStatus status) {
     setState(() => hasSmsPerms = status.isGranted);
@@ -99,8 +99,8 @@ class _PermissionManagerState extends State<PermissionManager> {
           .then((status) => contactsPermsHandler(status));
     }
     if (!hasNotificationsPerms && mounted) {
-      // await NotificationPerms.request() //
-      //     .then((isAllowed) => notificationPermsHandler(isAllowed));
+      await NotificationPerms.request() //
+          .then((isAllowed) => notificationPermsHandler(isAllowed));
     }
     if (!hasLocPerms && mounted) {
       await GeolocationPerms.request() //
@@ -120,7 +120,7 @@ class _PermissionManagerState extends State<PermissionManager> {
       contactsPermsHandler(status);
     });
     NotificationPerms.check().then((isAllowed) {
-      // notificationPermsHandler(isAllowed);
+      notificationPermsHandler(isAllowed);
     });
     SMSPerms.check().then((status) {
       smsPermsHandler(status);

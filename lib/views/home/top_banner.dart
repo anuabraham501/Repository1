@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:women/colors.dart';
 
 class TopBanner extends StatelessWidget {
   const TopBanner({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class TopBanner extends StatelessWidget {
         Text(
           "Trigger a SOS in just one tap!",
           style: TextStyle(
-            color: Colors.blue,
+            color: primaryColor,
             fontWeight: FontWeight.w600,
             fontSize: 21,
           ),

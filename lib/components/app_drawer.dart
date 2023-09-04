@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:women/services/auth_methods.dart';
@@ -53,13 +54,11 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             title: const Text("Logout"),
             tileColor: Colors.grey[300],
-            onTap: () async {
-              // NotificationMethods.removeAllNotifications();
-              await AuthMethods().signOut();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const SignIn()),
-              );
+            onTap: () {
+              AuthMethods().signOut().then((_) {
+                AwesomeNotifications().dismissAllNotifications();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignIn()));
+              });
             },
             trailing: SvgPicture.asset("assets/icons/log-out.svg", height: 25),
           ),

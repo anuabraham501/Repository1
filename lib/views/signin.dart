@@ -1,7 +1,6 @@
-// import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:women/colors.dart';
 import 'package:women/services/auth_methods.dart';
 import 'package:women/views/home/home.dart';
 
@@ -25,7 +24,7 @@ class _SignInState extends State<SignIn> {
           ],
         ),
       ),
-      backgroundColor: Colors.lightGreen,
+      backgroundColor: primaryColor,
       body: Center(
         child: Column(
           children: <Widget>[
@@ -67,7 +66,7 @@ class _SignInState extends State<SignIn> {
                     const Text(
                       "Sign In with Google",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: primaryColor,
                         fontWeight: FontWeight.w500,
                         fontSize: 21,
                       ),

@@ -1,11 +1,11 @@
 import "package:flutter/material.dart";
 import "package:women/components/app_drawer.dart";
-// import 'package:women/components/permission_manager/permission_manager.dart';
+import 'package:women/components/permission_manager/permission_manager.dart';
 import 'package:women/services/sos_message_methods.dart';
 import "package:women/services/sos_notification_methods.dart";
-// import "package:women/views/settings.dart";
-import "top_banner.dart";
-import "bottom_content.dart";
+import "package:women/views/settings.dart";
+import "package:women/views/home/top_banner.dart";
+import "package:women/views/home/bottom_content.dart";
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -47,22 +47,22 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.fromLTRB(16, 70, 16, 24),
             child: TopBanner(key: UniqueKey()),
           ),
-          // Container(
-          //   padding: const EdgeInsets.symmetric(vertical: 10),
-          //   child: ListTile(
-          //     title: const Text("Edit SOS Settings"),
-          //     subtitle: const Text("SOS delay, SOS message"),
-          //     onTap: () => Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => const Settings()),
-          //     ),
-          //     trailing: const FittedBox(
-          //       child: Icon(Icons.settings, size: 25),
-          //     ),
-          //   ),
-          // ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: ListTile(
+              title: const Text("Edit SOS Settings"),
+              subtitle: const Text("SOS delay, SOS message"),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Settings()),
+              ),
+              trailing: const FittedBox(
+                child: Icon(Icons.settings, size: 25),
+              ),
+            ),
+          ),
           BottomContent(key: UniqueKey()),
-          // PermissionManager(key: UniqueKey()),
+          PermissionManager(key: UniqueKey()),
         ],
       ),
     );

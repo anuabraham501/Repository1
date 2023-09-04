@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:women/colors.dart';
+import 'package:women/services/notification_controller.dart';
 import 'package:women/views/home/home.dart';
 import 'package:women/views/signin.dart';
 import 'package:women/services/auth_methods.dart';
@@ -8,7 +10,7 @@ import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // NotificationController.initializeLocalNotifications();
+  NotificationController.initializeLocalNotifications();
 
   runApp(const MyApp());
   AuthMethods().signOut();
@@ -40,7 +42,7 @@ class _MyAppState extends State<MyApp> {
       title: MyApp.appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
+        primarySwatch: primaryColor,
       ),
       home: FutureBuilder(
         future: getDefaultRoute(),

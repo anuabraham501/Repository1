@@ -13,7 +13,6 @@ Future<void> main() async {
   NotificationController.initializeLocalNotifications();
 
   runApp(const MyApp());
-  AuthMethods().signOut();
 }
 
 class MyApp extends StatefulWidget {

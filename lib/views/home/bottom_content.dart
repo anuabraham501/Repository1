@@ -88,7 +88,7 @@ class BottomContent extends StatelessWidget {
               child: Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 35.0, top: 8, bottom: 8, right: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
                     child: SvgPicture.asset(
                       "assets/icons/add_alert.svg",
                       colorFilter: const ColorFilter.mode(Colors.blueGrey, BlendMode.srcIn),

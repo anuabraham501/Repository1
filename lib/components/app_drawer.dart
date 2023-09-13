@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:women/services/auth_methods.dart';
 import 'package:women/services/shared_preferences.dart';
+import 'package:women/views/laws.dart';
 import 'package:women/views/settings.dart';
 import 'package:women/views/signin.dart';
 
@@ -49,6 +50,17 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
             trailing: const FittedBox(
               child: Icon(Icons.settings, size: 25),
+            ),
+          ),
+          ListTile(
+            title: const Text("Info, Laws, etc."),
+            subtitle: const Text("Stay up to date on indian laws..."),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Laws()),
+            ),
+            trailing: const FittedBox(
+              child: Icon(Icons.info, size: 25),
             ),
           ),
           ListTile(
